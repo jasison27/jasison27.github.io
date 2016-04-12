@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<script type="text/JavaScript">
+<html>
+<head>
+<script type="text/javascript">
     var hexcase = 0;
     var chrsz = 8;
     function hex_sha1(s) {
@@ -83,19 +83,40 @@ function calcDigest() {
     var digestM = hex_sha1(document.SHAForm.SourceMessage.value);
     document.SHAForm.MessageDigest.value = digestM;
 }
+function validate(field) {
+    with (field) {
+        if (hex_sha1( value )=="00000005000000020000000000000001000000030000000100000004"){
+            alert("Congratulations!");
+        } else {
+            alert("Try again.");
+        }
+    }
+}
+
+function check(thisform) {
+    with (thisform) {
+        validate(passcode);
+    }
+}
 </script>
-<script type="text/JavaScript">
-   function check() {
-    //00000005000000020000000000000001000000030000000100000004
-   }
-</script>
+</head>
+
 <body>
+<form action="#" onsubmit="check(this)" method="post">
+Passcode: <input type="text" name="passcode">
+<input type="submit" value="Submit"> 
+</form>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49033045-2', 'auto');
+  ga('send', 'pageview');
 
 </script>
-<form action="#" method="post">
-    <input type="text" name="passcode"/>
-    <p><button value="confirm" onclick="check()">submit</button></p>
-</form>
 </body>
 
 </html>
